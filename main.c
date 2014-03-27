@@ -1,15 +1,20 @@
 #include "read.h"
 #include <stdio.h>
+#include "automat_komorkowy.h"
 
 /* The Game of Life */
 
 int main ( int argc, char **argv){
+	
+	int **matrix = readFromFile(argv[1]);
 
-	Matrix * matrix = readFromFile(argv[1]);
+	int r = ReadRows(argv[1]);
 
-	automat_komorkowy(matrix);	
+	int c = ReadColumns(argv[1]);
 
-	PrintMatrix(matrix);
-		
+	lista l = NULL;
+
+	automat_komorkowy(matrix,r,c,l);	
+
 	return 0;
 }

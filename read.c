@@ -2,22 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Matrix * readFromFile(char * fname){
+int readFromFile(char * fname){
 
 	int r,c;
 	int ir,ic;
+	int i;
 	FILE * file = fopen(fname,"r");
-	Matrix * matrix = NULL;
-	
-	/* wczytywanie danych do Matrix-a */
+	int **matrix;
+
+	/* wczytywanie danych do matrix-a */
 
 	if(file != NULL){			
+		
 		fscanf(file,"%d %d",&r,&c);
-		matrix = CreateMatrix(r,c);
+		
+		matrix = (int**)malloc(sizeof(int*) * r);
+			for(i=0 ; i < r ; i++)
+				matrix[i] = (int*)malloc(sizeof(int) * c);
+
 		if(matrix != NULL){
 			for(ir=0 ; ir < r ; ir++){
 				for(ic=0 ; ic < c ; ic++){
-					fscanf(file,"%d",&(matrix->data[ir][ic]));
+					fscanf(file,"%d",&(matrix[ir][ic]));
 				}
 			}
 		} else 
@@ -30,32 +36,41 @@ Matrix * readFromFile(char * fname){
 	return matrix;
 }
 
-Matrix * CreateMatrix(int r, int c){
-
-	int i;
-
-	Matrix * matrix = (Matrix *) malloc(sizeof(Matrix));
-
-	if (matrix != NULL) {
-		matrix->r = r;
-		matrix->c = c;
-		matrix->data=(int**)malloc(sizeof(int*) * r);
-		for(i=0 ; i < r ; i++){
-			matrix->data[i] = (int*)malloc(sizeof(int) * c);
-		}
-	}
-
-	return matrix;
-}
-
-void PrintMatrix(Matrix *matrix){
+void PrintMatrix(int **matrix,int r,int c){
 	
 	int i,j;
 
-	for(i=0 ; i < matrix->r ; i++){
-		for(j=0 ; j < matrix->c ; j++)
-			printf(" %d ",matrix->data[i][j]);
+	for(i=0 ; i < r ; i++){
+		for(j=0 ; j < c ; j++)
+			printf(" %d ",matrix[i][j]);
 		printf("\n");
 	} 
 	printf("\n");
 }
+
+int ReadRows(char *fname){
+
+	int r;
+
+	FILE * file = fopen(fname,"r");
+
+	fscanf(file,"%d",&r);
+
+	fclose(file);
+
+	return r;
+}
+
+int ReadColumns(char *fname){
+
+	int c,r;
+
+	FILE * file = fopen(fname,"r");
+
+	fscanf(file,"%d %d",&r,&c);
+
+	fclose(file);
+
+	return c;
+}
+

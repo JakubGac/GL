@@ -1,15 +1,8 @@
 #ifndef _READ_H
 #define _READ_H
 
-typedef struct _Matrix {
-		int r,c;
-		int **data;
-} Matrix; 
+int readFromFile(char * fname); 
 
-Matrix * readFromFile(char * fname); 
-
-Matrix * CreateMatrix(int r, int c);
-
-void PrintMatrix(Matrix * matrix);
+void PrintMatrix(int **matrix,int r,int c);
 
 #endif
