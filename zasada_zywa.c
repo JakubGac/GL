@@ -1,9 +1,9 @@
 #include "zasada_zywa.h"
 #include "read.h"
 
-int Zasada_Zywa(int **tablica, int r, int c){
+int zasada_zywa(int **tablica, int r, int c,int *zmienna){
 
-	int i,j;
+	int i;
 	int ile_zywych=0;
 
 	for(i=r-1 ; i < c+2 ; i++){ /* przeszukanie wiersza nad komórką */
@@ -21,17 +21,16 @@ int Zasada_Zywa(int **tablica, int r, int c){
 	if(tablica[r][c-1]){	     /* przeszukanie z lewej strony komórki */	 
 		ile_zywych++;
 	}
-	
+
 	if(tablica[r][c+2]){	     /* przeszukanie z prawej strony komórki */
 		ile_zywych++;
 	}
 
 	if(ile_zywych == 2 || ile_zywych == 3){
-		tablica[r][c]=1;
+		*zmienna=1;
 	} else {
-		tablica[r][c]=0;
+		*zmienna=0;
 	}
 
-	return tablica;
-
+	return 0;
 }

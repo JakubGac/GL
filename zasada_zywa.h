@@ -1,6 +1,6 @@
 #ifndef _ZASADA_ZYWA_H
 #define _ZASADA_ZYWA_H
 
-int Zasada_Zywa();
+int zasada_zywa( int **tablica, int r, int c, int *zmienna);
 
 #endif

@@ -13,8 +13,10 @@ int main ( int argc, char **argv){
 	int c = ReadColumns(argv[1]);
 
 	lista l = NULL;
+	
+	int ilosc_generacji=3;
 
-	automat_komorkowy(matrix,r,c,l);	
+	automat_komorkowy(matrix,r,c,ilosc_generacji,l);
 
 	return 0;
 }
