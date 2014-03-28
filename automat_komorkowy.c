@@ -10,35 +10,43 @@ int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l){
 	int i;
 	
 	int **nowa_generacja;
+	
+	int **tablica_pomocnicza;
 
 	zapisz_generacje(l,tablica);
 
 	for(i=0 ; i < ilosc_generacji ; i++){
+		
 		PrintMatrix(tablica,r,c);
+		
 		nowa_generacja = kopiuj_generacje(tablica,r,c);
-		nowa_generacja = generacja(tablica,r,c);
+		tablica_pomocnicza = kopiuj_generacje(tablica,r,c);
+	
+		nowa_generacja = generacja(tablica,r,c,tablica_pomocnicza);
+
 		tablica = kopiuj_generacje(nowa_generacja,r,c);
+
 		zapisz_generacje(l,tablica);
 	}
 
 	return 0;
 }
 
-int generacja(int **tablica, int r, int c){
+int generacja(int **tablica, int r, int c,int **tablica_zmian){
 
 	int i,j;
 
 	for(i = 1 ; i  < r-1 ; i++){
 		for(j = 1 ; j < c-1 ; j++){
 			if ( tablica[i][j] == 1){	/* komórka żywa */
-				zasada_zywa(tablica,i,j,&(tablica[i][j]));
+				zasada_zywa(tablica,i,j,&(tablica_zmian[i][j]));
 			} else { 			/*komórka martwa */
-				zasada_martwa(tablica,i,j,&(tablica[i][j]));
+				zasada_martwa(tablica,i,j,&(tablica_zmian[i][j]));
 			}                        
 		}
 	}
 
-	return tablica;
+	return tablica_zmian;
 }
 
 int zapisz_generacje(lista l, int **tablica){
