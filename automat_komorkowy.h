@@ -8,10 +8,14 @@ typedef struct l {
 
 int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l);
 
-int generacje(int **tablica,int r, int c);
+int generacje(int **tablica,int r, int c, int tablica_pomocnicza);
 
-int zapisz_generacje(lista l, int **tablica);
+lista zapisz_generacje(lista l, int **tablica);
 
-int kopiuj_generacje(int **tablica, int r, int c);
+int skopiuj(int **tablica, int **nowa_tablica, int r, int c);
+
+void wypisz(int **tablica);
+
+void wypisz_listee(lista l);
 
 #endif 

@@ -3,81 +3,98 @@
 #include "automat_komorkowy.h"
 #include "zasada_zywa.h"
 #include "zasada_martwa.h"
-#include "read.h"
 
 int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l){
 
 	int i;
 	
 	int **nowa_generacja;
-	
+
 	int **tablica_pomocnicza;
 
-	zapisz_generacje(l,tablica);
+	nowa_generacja = (int**)malloc(sizeof(int*) * r);
+		for(i=0 ; i < r ; i++)
+			nowa_generacja[i] = (int*)malloc(sizeof(int) * c);
+
+	tablica_pomocnicza = (int**)malloc(sizeof(int*) * r);
+		for(i=0 ; i < r ; i++)
+			tablica_pomocnicza[i] = (int*)malloc(sizeof(int) * c);
 
 	for(i=0 ; i < ilosc_generacji ; i++){
 		
-		PrintMatrix(tablica,r,c);
-		
-		nowa_generacja = kopiuj_generacje(tablica,r,c);
-		tablica_pomocnicza = kopiuj_generacje(tablica,r,c);
-	
+		nowa_generacja = skopiuj(tablica,nowa_generacja,r,c);
+
+		tablica_pomocnicza = skopiuj(tablica,tablica_pomocnicza,r,c);
+
 		nowa_generacja = generacja(tablica,r,c,tablica_pomocnicza);
 
-		tablica = kopiuj_generacje(nowa_generacja,r,c);
-
-		zapisz_generacje(l,tablica);
+		tablica = skopiuj(nowa_generacja,tablica,r,c);
+	
+		l = zapisz_generacje(l,tablica); 
 	}
 
 	return 0;
 }
 
-int generacja(int **tablica, int r, int c,int **tablica_zmian){
+int generacja(int **tablica, int r, int c, int **tablica_pomocnicza){
 
 	int i,j;
 
-	for(i = 1 ; i  < r-1 ; i++){
-		for(j = 1 ; j < c-1 ; j++){
+	for(i = 0 ; i  < r ; i++){
+		for(j = 0 ; j < c ; j++){
 			if ( tablica[i][j] == 1){	/* komórka żywa */
-				zasada_zywa(tablica,i,j,&(tablica_zmian[i][j]));
+				zasada_zywa(tablica,i,j,&(tablica_pomocnicza[i][j]),r,c);
 			} else { 			/*komórka martwa */
-				zasada_martwa(tablica,i,j,&(tablica_zmian[i][j]));
+				zasada_martwa(tablica,i,j,&(tablica_pomocnicza[i][j]),r,c);
 			}                        
 		}
 	}
 
-	return tablica_zmian;
+	return tablica_pomocnicza;
 }
 
-int zapisz_generacje(lista l, int **tablica){
-	
+lista zapisz_generacje(lista l, int **tablica){
+
 	if( l == NULL){
 		lista next = malloc(sizeof * next);
 		next->tablica=tablica;
 		next->next=NULL;
 		return next;
 	} else {
-		l->next=zapisz_generacje(l,tablica);
+		l->next=zapisz_generacje(l->next,tablica);
 		return l;
 	}
-
-	return 0;
 }
 
-int kopiuj_generacje(int **tablica,int r,int c){
-	
+int skopiuj(int **tablica, int **nowa_tablica,int r, int c){
+
 	int i,j;
 
-	int **generacja;
-
-	generacja = (int**)malloc(sizeof(int*) * r);
-		for(i=0 ; i < r ; i++)
-			generacja[i] = (int*)malloc(sizeof(int) * c);
-
- 	for(i=0 ; i < r ; i++){
-		for(j=0 ; j < r ; j++)
-			generacja[i][j]=tablica[i][j];
+	for(i=0 ; i < r ; i++){
+		for(j=0 ; j < c ; j++)
+			nowa_tablica[i][j] = tablica[i][j];
 	}
 
-	return generacja;
+	return nowa_tablica;
+}
+
+void wypisz(int **tablica){
+
+	int i,j;
+
+	for(i=0 ; i < 10 ; i++){
+		for(j=0 ; j < 10 ; j++)
+			printf(" %d ",tablica[i][j]);
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void wypisz_listee(lista l){
+
+	while(l != NULL){
+		wypisz(l->tablica);
+		l=l->next;
+	}
+
 }
