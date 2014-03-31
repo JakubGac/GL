@@ -27,27 +27,13 @@ int readFromFile(char * fname){
 				}
 			}
 		} else 
-			printf(" Wystapil blad w trakcie tworzenia macierza");
+			printf(" Wystapil blad w trakcie tworzenia macierzy");
 	} else 
 		printf(" Wystapil blad w trakcie odczytu pliku ");
 
 	fclose(file);
 	
 	return matrix;
-}
-
-void PrintMatrix(int **matrix,int r,int c){
-	
-	int i,j;
-
-	printf("\n");
-
-	for(i=0 ; i < r ; i++){
-		for(j=0 ; j < c ; j++)
-			printf(" %d ",matrix[i][j]);
-		printf("\n");
-	} 
-	printf("\n");
 }
 
 int ReadRows(char *fname){

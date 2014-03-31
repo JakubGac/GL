@@ -10,7 +10,7 @@ int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l);
 
 int generacje(int **tablica,int r, int c, int tablica_pomocnicza);
 
-lista zapisz_generacje(lista l, int **tablica);
+lista zapisz_generacje(lista l, int **tablica,int r, int c);
 
 int skopiuj(int **tablica, int **nowa_tablica, int r, int c);
 

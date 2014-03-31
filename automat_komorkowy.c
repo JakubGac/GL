@@ -30,7 +30,7 @@ int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l){
 
 		tablica = skopiuj(nowa_generacja,tablica,r,c);
 	
-		l = zapisz_generacje(l,tablica); 
+		l = zapisz_generacje(l,tablica,r,c); 
 	}
 
 	return 0;
@@ -53,15 +53,20 @@ int generacja(int **tablica, int r, int c, int **tablica_pomocnicza){
 	return tablica_pomocnicza;
 }
 
-lista zapisz_generacje(lista l, int **tablica){
+lista zapisz_generacje(lista l, int **tablica,int r, int c){
+
+	int i;
 
 	if( l == NULL){
 		lista next = malloc(sizeof * next);
-		next->tablica=tablica;
+		next->tablica= (int**)malloc(sizeof(int*) * r);
+			for(i=0 ; i < r ; i++)
+				next->tablica[i] = (int*)malloc(sizeof(int) * c);
+		next->tablica = skopiuj(tablica,next->tablica,r,c);
 		next->next=NULL;
 		return next;
 	} else {
-		l->next=zapisz_generacje(l->next,tablica);
+		l->next=zapisz_generacje(l->next,tablica,r,c);
 		return l;
 	}
 }
