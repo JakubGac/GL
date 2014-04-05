@@ -1,9 +1,10 @@
 #include "read.h"
-#include "automat_komorkowy.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "przechowywanie.h"
+#include "automat_komorkowy.h"
 
-int readFromFile(char * fname,lista l){
+lista readFromFile(char * fname,lista l){
 
 	int r,c;
 	int ir,ic;
@@ -20,7 +21,6 @@ int readFromFile(char * fname,lista l){
 		matrix = (int**)malloc(sizeof(int*) * r);
 			for(i=0 ; i < r ; i++)
 				matrix[i] = (int*)malloc(sizeof(int) * c);
-
 		if(matrix != NULL){
 			for(ir=0 ; ir < r ; ir++){
 				for(ic=0 ; ic < c ; ic++){
@@ -28,7 +28,7 @@ int readFromFile(char * fname,lista l){
 				}
 			}
 		} else 
-			printf(" Wystapil blad w trakcie tworzenia macierza");
+			printf(" Wystapil blad w trakcie tworzenia macierzy");
 	} else 
 		printf(" Wystapil blad w trakcie odczytu pliku ");
 
@@ -36,7 +36,7 @@ int readFromFile(char * fname,lista l){
 
 	fclose(file);
 	
-	return 0;
+	return l;
 }
 
 int ReadRows(char *fname){

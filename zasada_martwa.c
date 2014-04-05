@@ -1,4 +1,4 @@
-#include "zasada_zywa.h"
+#include "zasada_martwa.h"
 
 int zasada_martwa(int **tablica, int r, int c,int *zmienna, int rows, int columns){
 

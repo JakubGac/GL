@@ -5,23 +5,43 @@
 #include "zasada_martwa.h"
 #include "przechowywanie.h"
 
-int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l){
+void generacja(int **tablica, int r, int c, int **tablica_pomocnicza){
 
-	int i;
-	
-	int **nowa_generacja = alokacja_pamieci(nowa_generacja,r,c);
+        int i,j;
 
-	int **tablica_pomocnicza = alokacja_pamieci(tablica_pomocnicza,r,c);
+        for(i = 0 ; i  < r ; i++){
+                for(j = 0 ; j < c ; j++){
+                        if ( tablica[i][j] == 1){       /* komórka żywa */
+                                zasada_zywa(tablica,i,j,&(tablica_pomocnicza[i][j]),r,c);
+                        } else {                        /*komórka martwa */
+                                zasada_martwa(tablica,i,j,&(tablica_pomocnicza[i][j]),r,c);
+                        }
+                }
+        }
+}
+
+int automat_komorkowy(int **tablica,int r, int c,int ilosc_generacji,lista l){
+
+	int i,a,b;
+			
+
+	int **nowa_generacja = (int**)malloc(sizeof(int*) * r);
+                for(i=0 ; i < r ; i++)
+                        nowa_generacja[i] = (int*)malloc(sizeof(int) * c);
 
 	for(i=0 ; i < ilosc_generacji ; i++){
 		
-		nowa_generacja = skopiuj(tablica,nowa_generacja,r,c);
+		for(a=0 ; a < r ; a++){
+			for(b=0 ; b < c ; b++)
+				nowa_generacja[a][b] = tablica[a][b];
+		}
 
-		tablica_pomocnicza = skopiuj(tablica,tablica_pomocnicza,r,c);
+		generacja(tablica,r,c,nowa_generacja);
 
-		nowa_generacja = generacja(tablica,r,c,tablica_pomocnicza);
-
-		tablica = skopiuj(nowa_generacja,tablica,r,c);
+		for(a=0 ; a < r ; a++){
+			for(b=0 ; b < c ; b++)
+				tablica[a][b] = nowa_generacja[a][b];
+		}
 	
 		l = zapisz_generacje(l,tablica,r,c); 
 	}
@@ -29,61 +49,26 @@ int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l){
 	return 0;
 }
 
-int alokacja_pamieci(int **tablica,int r, int c){
+lista zapisz_generacje(lista l, int **tablica, int r, int c){
 
-	int i;
+        int i,a,b;
 
-	tablica = (int**)malloc(sizeof(int*) * r);
-		for(i=0 ; i < r ; i++)	
-			tablica[i] = (int*)malloc(sizeof(int) * c);
+        if( l == NULL){
+                lista next = malloc(sizeof * next);
 
-	return tablica;
-}
+                next->tablica_element= (int**)malloc(sizeof(int*) * r);
+                        for(i=0 ; i < r ; i++)
+                                next->tablica_element[i] = (int*)malloc(sizeof(int) * c);
 
-int generacja(int **tablica, int r, int c, int **tablica_pomocnicza){
+                for(a=0 ; a < r ; a++){
+                        for(b=0 ; b < c ; b++)
+                                next->tablica_element[a][b] = tablica[a][b];
+                }
 
-	int i,j;
-
-	for(i = 0 ; i  < r ; i++){
-		for(j = 0 ; j < c ; j++){
-			if ( tablica[i][j] == 1){	/* komórka żywa */
-				zasada_zywa(tablica,i,j,&(tablica_pomocnicza[i][j]),r,c);
-			} else { 			/*komórka martwa */
-				zasada_martwa(tablica,i,j,&(tablica_pomocnicza[i][j]),r,c);
-			}                        
-		}
-	}
-
-	return tablica_pomocnicza;
-}
-
-lista zapisz_generacje(lista l, int **tablica_element, int r, int c){
-
-	int i;
-
-	if( l == NULL){
-		lista next = malloc(sizeof * next);
-		next->tablica_element = (int**)malloc(sizeof(int*) * r);
-			for(i=0 ; i < r ; i++)
-				next->tablica_element[i] = (int*)malloc(sizeof(int) * c);
-		next->tablica_element = skopiuj(tablica_element,next->tablica_element,r,c);	
-
-		next->next=NULL;
-		return next;
-	} else {
-		l->next=zapisz_generacje(l->next,tablica_element,r,c);
-		return l;
-	}
-}
-
-int skopiuj(int **tablica, int **nowa_tablica,int r, int c){
-
-	int i,j;
-
-	for(i=0 ; i < r ; i++){
-		for(j=0 ; j < c ; j++)
-			nowa_tablica[i][j] = tablica[i][j];
-	}
-
-	return nowa_tablica;
+                next->next=NULL;
+                return next;
+        } else {
+                l->next=zapisz_generacje(l->next,tablica,r,c);
+                return l;
+        }
 }

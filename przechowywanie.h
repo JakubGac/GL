@@ -1,10 +1,9 @@
 #ifndef _PRZECHOWYWANIE_H
 #define _PRZECHOWYWANIE_H
 
-int readFromFile(char * fname); 
-
-int ReadRows(char *fname);
-
-int ReadColumns(char *fname);
+typedef struct l {
+		int **tablica_element;
+		struct l * next;
+} * lista;
 
 #endif
