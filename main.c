@@ -22,8 +22,6 @@ int main ( int argc, char **argv){
 		int c = ReadColumns(argv[1]);
 	
 		int ilosc_generacji=20;
-
-		l = zapisz_generacje(l,matrix,r,c);
 	
 		automat_komorkowy(matrix,r,c,ilosc_generacji,l);
 
