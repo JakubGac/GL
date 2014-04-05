@@ -1,14 +1,15 @@
 #include "read.h"
+#include "automat_komorkowy.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-int readFromFile(char * fname){
+int readFromFile(char * fname,lista l){
 
 	int r,c;
 	int ir,ic;
 	int i;
 	FILE * file = fopen(fname,"r");
-	int matrix;
+	int **matrix;
 
 	/* wczytywanie danych do matrix-a */
 
@@ -30,6 +31,8 @@ int readFromFile(char * fname){
 			printf(" Wystapil blad w trakcie tworzenia macierza");
 	} else 
 		printf(" Wystapil blad w trakcie odczytu pliku ");
+
+	l = zapisz_generacje(l,matrix,r,c);
 
 	fclose(file);
 	
