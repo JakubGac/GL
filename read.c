@@ -8,7 +8,7 @@ int readFromFile(char * fname){
 	int ir,ic;
 	int i;
 	FILE * file = fopen(fname,"r");
-	int **matrix;
+	int matrix;
 
 	/* wczytywanie danych do matrix-a */
 
@@ -33,21 +33,7 @@ int readFromFile(char * fname){
 
 	fclose(file);
 	
-	return matrix;
-}
-
-void PrintMatrix(int **matrix,int r,int c){
-	
-	int i,j;
-
-	printf("\n");
-
-	for(i=0 ; i < r ; i++){
-		for(j=0 ; j < c ; j++)
-			printf(" %d ",matrix[i][j]);
-		printf("\n");
-	} 
-	printf("\n");
+	return 0;
 }
 
 int ReadRows(char *fname){

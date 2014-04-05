@@ -7,37 +7,31 @@
 
 int main ( int argc, char **argv){
 	
-	int **matrix = readFromFile(argv[1]);
-
-	int r = ReadRows(argv[1]);
-
-	int c = ReadColumns(argv[1]);
-
-	lista l = NULL;
+	if(argc < 2 ){
 	
-	int ilosc_generacji=3;
+		wypisz_info();
 
-	l = zapisz_generacje(l,matrix);
+	} else {
 
-	wypisz_listee(l);
+		lista l = NULL;
+
+		readFromFile(argv[1]);
+
+		int r = ReadRows(argv[1]);
+
+		int c = ReadColumns(argv[1]);
 	
-	automat_komorkowy(matrix,r,c,ilosc_generacji,l);
+		int ilosc_generacji=20;
 
-	printf("po\n");
+		l = zapisz_generacje(l,matrix,r,c);
+	
+		automat_komorkowy(matrix,r,c,ilosc_generacji,l);
 
-	wypisz_listee(l);
+		zapisz_generacje_do_pliku(l,r,c,argv[2]);
 
-	int i,j;
+		generuj_obrazek(l,r);	
 
-/*	while(l != NULL){
-		for(i=0 ; i < r ; i++){
-			for(j=0 ; j < c ; j++)
-				printf(" %d ",l->tablica[i][j]);
-			printf("\n");	
-		}
-		printf("\n");
-		l=l->next;
 	}
-*/
+
 	return 0;
 }

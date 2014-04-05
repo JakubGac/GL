@@ -2,20 +2,18 @@
 #define _AUOTMAT_KOMORKOWY_H
 
 typedef struct l {
-		int **tablica;
+		int **tablica_element;
 		struct l * next;
 } *lista;
 
-int automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l);
+int  automat_komorkowy(int **tablica, int r, int c,int ilosc_generacji,lista l);
 
 int generacje(int **tablica,int r, int c, int tablica_pomocnicza);
 
-lista zapisz_generacje(lista l, int **tablica);
+int alokacja_pamieci(int **tablica, int r, int c);
+
+lista zapisz_generacje(lista l, int **tablica,int r, int c);
 
 int skopiuj(int **tablica, int **nowa_tablica, int r, int c);
-
-void wypisz(int **tablica);
-
-void wypisz_listee(lista l);
 
 #endif 

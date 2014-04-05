@@ -3,8 +3,6 @@
 
 int readFromFile(char * fname); 
 
-void PrintMatrix(int **matrix,int r,int c);
-
 int ReadRows(char *fname);
 
 int ReadColumns(char *fname);
