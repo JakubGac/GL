@@ -19,18 +19,22 @@ void zapisz_generacje_do_pliku(lista l, int r, int c, char *fname){
 	}
 }
 
-void wypisz_info(){
+void zapisz_generacje_do_pliku_co_ile(lista l, int r, int c, char *fname,int co_ile){
 
-	printf("\n Automat Komórkowy\n\n");
+        int i,j;
 
-	printf("\t - p - plik z początkową konfiguracją i wielkością siatki \n");
-	
-	printf("\t - N - liczba generacji do przeprowadzenia \n");
-	
-	printf("\t - f - wygenerowanie obrazów \n");
+        FILE * out = fopen(fname,"w");
 
-	printf("\t - z - zapisanie generacji do pliku. Podaj nazwe pliku \n");
+        while( l != NULL){
+                for(i=0 ; i < r ; i++){
+                        for(j=0 ; j < c ; j++)
+                                fprintf(out," %d ",l->tablica_element[i][j]);
+                        fprintf(out,"\n");
+                }
+                fprintf(out,"\n");
 
-	printf("\t - i - ustal częstotliwość zachowywanych generacji \n\n");	
-
+		for(i=0 ; i < co_ile ; i++)
+                	l = l->next;
+        }
 }
+

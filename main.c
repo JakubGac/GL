@@ -68,19 +68,19 @@ int main ( int argc, char **argv){
 	
 	/* sprawdzam czy mam zapisac wszystkie generacje */
 	
-/*	if(co_ile_generacji){
+	if(co_ile_generacji){
 		zapisz_generacje_do_pliku_co_ile(l,r,c,fname_out,co_ile_generacji);
-	} else { */
+	} else { 
 		if(plik)	/* zapisywanie generacji do pliku */
 			zapisz_generacje_do_pliku(l,r,c,fname_out);
-/*	} */
+	} 
 	
-/*	if(co_ile_generacji){
+	if(co_ile_generacji){
 		generuj_obrazek_co_ile(l,r,co_ile_generacji);
-	} else { */
+	} else { 
 		if(obraz)	/* generowanie obrazków */
 			generuj_obrazek(l,r);	
-/*	} */
+	} 
 
 	return EXIT_SUCCESS;
 }

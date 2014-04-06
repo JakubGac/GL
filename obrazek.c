@@ -9,7 +9,6 @@ int t2[100][100];
 void generuj_obrazek(lista l, int r){
 
 	int i=0;
-
 	int j,k;
 
 	while(l != NULL){
@@ -27,12 +26,39 @@ void generuj_obrazek(lista l, int r){
 		wypisywanie(l->tablica_element,r,i);
 		l=l->next;
 		i++;
+	} 
+	 
+}
+
+void generuj_obrazek_co_ile(lista l, int r, int co_ile){
+
+	int i=0;
+	int j,k;
+
+	while(l != NULL){
+
+		for(j=0 ; j < 801 ; j++){
+			for(k=0 ; k < 801 ; k++)
+				t1[j][k]=0;
+		}
+
+		for(j=0 ; j < 100 ; j++){
+			for(k=0 ; k < 100 ; k++)
+				t2[j][k]=0; 
+		}
+
+		wypisywanie(l->tablica_element,r,i);
+
+		for(j=0 ; j < co_ile ; j++)
+			l=l->next;
+
+		i++;
 	}
 }
 
 void oznacz(int k, int l, int x, int n) {
 
-	int i=0,j=0,a=0,b=0;
+	int i,j,a,b;
 
 	for (i = k * x + 1, a = 1; a < x && i < 801; a++, i++){
 		for (j = l * x + 1, b = 1; b < x && j < 801; b++, j++)
@@ -47,8 +73,10 @@ void generuj(int x, int n){
 	int i, j;
 
 	for (i = 0; i < 801; i += x){
-		for (j = 0; j < 801; j++)
-			t1[i][j] = 1; t1[j][i] = 1;
+		for (j = 0; j < 801; j++){
+			t1[i][j] = 1; 
+			t1[j][i] = 1;
+		}
 	}
 
 	for (i = 0; i < n; i++){
@@ -69,16 +97,16 @@ int skala(int n){
 		return 800 / n + 1;
 }
 
-void wypisywanie(int **tabka,int n,int ktora_generacja){
+int wypisywanie(int **tabka,int n,int ktora_generacja){
 
-	int i, j;
-	
+	int i,j,x;
 	char nazwa_pliku[128];
+	FILE * fp;
 
-	sprintf(nazwa_pliku,"%d.ppm",ktora_generacja);
+	sprintf(nazwa_pliku,"image/%d",ktora_generacja);
 
-	FILE * fp = fopen(nazwa_pliku, "wb"); /* b - binary mode */
-	
+	fp = fopen(nazwa_pliku, "wb"); /* b - binary mode  */
+
 	fprintf(fp, "P6\n%d %d\n255\n", 800, 800);
 
 	for (i = 0; i < n; i++){
@@ -87,7 +115,7 @@ void wypisywanie(int **tabka,int n,int ktora_generacja){
 		}
 	}
 
-	int x = skala(n); /* obliczanie proporcji */
+	x = skala(n); /* obliczenie proporcij */
 
 	generuj(x, n); /* generowanie siatki */
 
@@ -121,4 +149,6 @@ void wypisywanie(int **tabka,int n,int ktora_generacja){
 	}
 
 	fclose(fp);
+
+	return EXIT_SUCCESS;
 }
