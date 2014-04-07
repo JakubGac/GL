@@ -82,5 +82,7 @@ int main ( int argc, char **argv){
 			generuj_obrazek(l,r);	
 	} 
 
+	free_lista(l,r);
+
 	return EXIT_SUCCESS;
 }
