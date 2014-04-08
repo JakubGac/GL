@@ -66,21 +66,11 @@ int main ( int argc, char **argv){
 
 	automat_komorkowy(l->tablica_element,r,c,ilosc_generacji,l);
 	
-	/* sprawdzam czy mam zapisac wszystkie generacje */
+	if(plik)	/* zapisywanie generacji do pliku */
+		zapisz_generacje_do_pliku(l,r,c,fname_out,co_ile_generacji);
 	
-	if(co_ile_generacji){
-		zapisz_generacje_do_pliku_co_ile(l,r,c,fname_out,co_ile_generacji);
-	} else { 
-		if(plik)	/* zapisywanie generacji do pliku */
-			zapisz_generacje_do_pliku(l,r,c,fname_out);
-	} 
-	
-	if(co_ile_generacji){
-		generuj_obrazek_co_ile(l,r,co_ile_generacji);
-	} else { 
-		if(obraz)	/* generowanie obrazków */
-			generuj_obrazek(l,r);	
-	} 
+	if(obraz)	/* generowanie obrazków */
+			generuj_obrazek(l,r,co_ile_generacji);	
 
 	free_lista(l,r);
 

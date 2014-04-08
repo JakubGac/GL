@@ -6,7 +6,7 @@
 int t1[801][801];
 int t2[100][100];
 
-void generuj_obrazek(lista l, int r){
+int generuj_obrazek(lista l, int r,int co_ile){
 
 	int i=0;
 	int j,k;
@@ -24,36 +24,23 @@ void generuj_obrazek(lista l, int r){
 		}
 
 		wypisywanie(l->tablica_element,r,i);
-		l=l->next;
+
+		if(co_ile){ /* jezeli tak to tworze tylko "co ktores" obrazki */
+			for(j=0 ; j < co_ile ; j++){
+                        	if(l->next != NULL)
+                                	l=l->next;
+                       		else
+                                	return -1;
+               		}
+		} else {
+			l=l->next;
+		}
+
 		i++;
 	} 
+
+	return 0;
 	 
-}
-
-void generuj_obrazek_co_ile(lista l, int r, int co_ile){
-
-	int i=0;
-	int j,k;
-
-	while(l != NULL){
-
-		for(j=0 ; j < 801 ; j++){
-			for(k=0 ; k < 801 ; k++)
-				t1[j][k]=0;
-		}
-
-		for(j=0 ; j < 100 ; j++){
-			for(k=0 ; k < 100 ; k++)
-				t2[j][k]=0; 
-		}
-
-		wypisywanie(l->tablica_element,r,i);
-
-		for(j=0 ; j < co_ile ; j++)
-			l=l->next;
-
-		i++;
-	}
 }
 
 void oznacz(int k, int l, int x, int n) {
@@ -103,7 +90,7 @@ int wypisywanie(int **tabka,int n,int ktora_generacja){
 	char nazwa_pliku[128];
 	FILE * fp;
 
-	sprintf(nazwa_pliku,"image/%d",ktora_generacja);
+	sprintf(nazwa_pliku,"image/%d.ppm",ktora_generacja);
 
 	fp = fopen(nazwa_pliku, "wb"); /* b - binary mode  */
 

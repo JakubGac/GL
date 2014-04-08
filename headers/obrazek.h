@@ -3,9 +3,7 @@
 
 #include "przechowywanie.h"
 
-void generuj_obrazek(lista l, int r);
-
-void generuj_obrazek_co_ile(lista l, int r, int co_ile);
+int generuj_obrazek(lista l, int r,int co_ile);
 
 void oznacz(int k, int l, int x, int n);
 
