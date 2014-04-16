@@ -59,3 +59,9 @@ test3:
 	./grawzycie -p data/b -N 4 -z wynik
 clean:
 	rm *.o
+cleanp:
+	@echo "Usunalem wszystkie stworzone zdjecia z generacjami"
+	rm ./image/*.ppm
+cleanf:
+	@echo "Usunalem wszyskie stworzone pliki z generacjami"
+	rm ./file/*.txt

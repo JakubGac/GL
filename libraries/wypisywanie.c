@@ -5,7 +5,15 @@ int zapisz_generacje_do_pliku(lista l, int r, int c, char *fname, int co_ile){
 
 	int i,j;
 
-	FILE * out = fopen(fname,"w");
+	FILE * out;
+
+	char filename[128];
+
+	sprintf(filename,"file/%s.txt",fname);
+
+	out = fopen(filename, "w");
+
+	l=l->next;
 
 	while( l != NULL){
 		for(i=0 ; i < r ; i++){
