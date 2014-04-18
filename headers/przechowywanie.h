@@ -6,10 +6,10 @@ typedef struct l {
 		struct l * next;
 } * lista;
 
+lista zapisz_generacje(lista l, int **tablica, int r, int c);
+
 void free_matrix(int **tablica, int r);
 
 void free_lista(lista l, int r);
-
-void free_lista_next(lista l, int r);
 
 #endif

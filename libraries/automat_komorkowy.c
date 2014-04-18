@@ -22,56 +22,31 @@ void generacja(int **tablica, int r, int c, int **tablica_pomocnicza){
 
 int automat_komorkowy(int **tablica,int r, int c,int ilosc_generacji,lista l){
 
-	int i,a,b;
-			
+        int i,a,b;
 
-	int **nowa_generacja = (int**)malloc(sizeof(int*) * r);
+
+        int **nowa_generacja = (int**)malloc(sizeof(int*) * r);
                 for(i=0 ; i < r ; i++)
                         nowa_generacja[i] = (int*)malloc(sizeof(int) * c);
 
-	for(i=0 ; i < ilosc_generacji ; i++){
-		
-		for(a=0 ; a < r ; a++){
-			for(b=0 ; b < c ; b++)
-				nowa_generacja[a][b] = tablica[a][b];
-		}
-
-		generacja(tablica,r,c,nowa_generacja);
-
-		for(a=0 ; a < r ; a++){
-			for(b=0 ; b < c ; b++)
-				tablica[a][b] = nowa_generacja[a][b];
-		}
-	
-		l = zapisz_generacje(l,tablica,r,c); 
-	}
-
-	free_matrix(nowa_generacja,r);
-
-	return 0;
-}
-
-lista zapisz_generacje(lista l, int **tablica, int r, int c){
-
-        int i,a,b;
-
-        if( l == NULL){
-                
-		lista next = malloc(sizeof * next);
-
-                next->tablica_element= (int**)malloc(sizeof(int*) * r);
-                        for(i=0 ; i < r ; i++)
-                                next->tablica_element[i] = (int*)malloc(sizeof(int) * c);
+        for(i=0 ; i < ilosc_generacji ; i++){
 
                 for(a=0 ; a < r ; a++){
                         for(b=0 ; b < c ; b++)
-                                next->tablica_element[a][b] = tablica[a][b];
+                                nowa_generacja[a][b] = tablica[a][b];
                 }
 
-                next->next=NULL;
-                return next;
-        } else {
-                l->next=zapisz_generacje(l->next,tablica,r,c);
-                return l;
+                generacja(tablica,r,c,nowa_generacja);
+
+                for(a=0 ; a < r ; a++){
+                        for(b=0 ; b < c ; b++)
+                                tablica[a][b] = nowa_generacja[a][b];
+                }
+
+                l = zapisz_generacje(l,tablica,r,c);
         }
+
+        free_matrix(nowa_generacja,r);
+
+        return 0;
 }
