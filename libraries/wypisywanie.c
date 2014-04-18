@@ -14,8 +14,6 @@ int zapisz_generacje_do_pliku(lista l, int r, int c, char *fname, int co_ile){
 
 	out = fopen(filename, "w");
 
-	l=l->next;
-
 	while( l != NULL){
 		for(i=0 ; i < r ; i++){
 			for(j=0 ; j < c ; j++)
