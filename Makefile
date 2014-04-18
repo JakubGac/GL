@@ -3,10 +3,10 @@ LIB = ./libraries
 
 OBJECTS = main.o automat_komorkowy.o obrazek.o przechowywanie.o wczytywanie.o wypisywanie.o zasada_martwa.o zasada_zywa.o
 
-main.o automat_komorkowy.o wczytywanie.o wypisywanie.o : $(HEADERS)/automat_komorkowy.h
+main.o automat_komorkowy.o : $(HEADERS)/automat_komorkowy.h
 automat_komorkowy.o zasada_zywa.o : $(HEADERS)/zasada_zywa.h
 automat_komorkowy.o zasada_martwa.o : $(HEADERS)/zasada_martwa.h
-main.o automat_komorkowy.o obrazek.o przechowywanie.o wczytywanie.o : $(HEADERS)/przechowywanie.h
+main.o automat_komorkowy.o obrazek.o przechowywanie.o wczytywanie.o wypisywanie.o : $(HEADERS)/przechowywanie.h
 main.o : $(HEADERS)/wczytywanie.h
 main.o : $(HEADERS)/wypisywanie.h
 main.o obrazek.o : $(HEADERS)/obrazek.h

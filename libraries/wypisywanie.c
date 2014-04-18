@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "automat_komorkowy.h"
+#include "przechowywanie.h"
 
 int zapisz_generacje_do_pliku(lista l, int r, int c, char *fname, int co_ile){
 

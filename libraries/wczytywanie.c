@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "przechowywanie.h"
-#include "automat_komorkowy.h"
 
 lista readFromFile(char * fname,lista l){
 
