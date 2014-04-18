@@ -7,8 +7,8 @@ main.o automat_komorkowy.o : $(HEADERS)/automat_komorkowy.h
 automat_komorkowy.o zasada_zywa.o : $(HEADERS)/zasada_zywa.h
 automat_komorkowy.o zasada_martwa.o : $(HEADERS)/zasada_martwa.h
 main.o automat_komorkowy.o obrazek.o przechowywanie.o wczytywanie.o wypisywanie.o : $(HEADERS)/przechowywanie.h
-main.o : $(HEADERS)/wczytywanie.h
-main.o : $(HEADERS)/wypisywanie.h
+main.o wczytywanie.o : $(HEADERS)/wczytywanie.h
+main.o wypisywanie.o : $(HEADERS)/wypisywanie.h
 main.o obrazek.o : $(HEADERS)/obrazek.h
 
 all: $(OBJECTS)

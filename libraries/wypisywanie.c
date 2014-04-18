@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "przechowywanie.h"
+#include "wypisywanie.h"
 
 int zapisz_generacje_do_pliku(lista l, int r, int c, char *fname, int co_ile){
 
