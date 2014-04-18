@@ -1,13 +1,13 @@
 HEADERS = headers
 LIB = ./libraries
 
-OBJECTS = main.o automat_komorkowy.o obrazek.o przechowywanie.o read.o wypisywanie.o zasada_martwa.o zasada_zywa.o
+OBJECTS = main.o automat_komorkowy.o obrazek.o przechowywanie.o wczytywanie.o wypisywanie.o zasada_martwa.o zasada_zywa.o
 
-main.o automat_komorkowy.o read.o wypisywanie.o : $(HEADERS)/automat_komorkowy.h
+main.o automat_komorkowy.o wczytywanie.o wypisywanie.o : $(HEADERS)/automat_komorkowy.h
 automat_komorkowy.o zasada_zywa.o : $(HEADERS)/zasada_zywa.h
 automat_komorkowy.o zasada_martwa.o : $(HEADERS)/zasada_martwa.h
-main.o automat_komorkowy.o obrazek.o przechowywanie.o read.o : $(HEADERS)/przechowywanie.h
-main.o : $(HEADERS)/read.h
+main.o automat_komorkowy.o obrazek.o przechowywanie.o wczytywanie.o : $(HEADERS)/przechowywanie.h
+main.o : $(HEADERS)/wczytywanie.h
 main.o : $(HEADERS)/wypisywanie.h
 main.o obrazek.o : $(HEADERS)/obrazek.h
 
@@ -31,7 +31,7 @@ przechowywanie.o: $(LIB)/przechowywanie.c
 	@echo "Kompiluję moduł $@"
 	@gcc -g -c -I$(HEADERS) $^
 
-read.o: $(LIB)/read.c
+wczytywanie.o: $(LIB)/wczytywanie.c
 	@echo "Kompiluję moduł $@"
 	@gcc -g -c -I$(HEADERS) $^
 

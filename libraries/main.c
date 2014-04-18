@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
-#include "read.h"
+#include "wczytywanie.h"
 #include "automat_komorkowy.h"
 #include "wypisywanie.h"
 #include "przechowywanie.h"
