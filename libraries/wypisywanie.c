@@ -4,6 +4,8 @@
 
 int zapisz_generacje_do_pliku(lista l, int r, int c, char *fname, int co_ile){
 
+	/* wypisywanie generacji do pliku */
+
 	int i,j;
 
 	FILE * out;

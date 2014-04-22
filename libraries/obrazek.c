@@ -13,6 +13,8 @@ int generuj_obrazek(lista l, int r,int co_ile){
 
 	while(l != NULL){
 
+		/* za każdym razem zeruje wartośći w tablicach */
+
 		for(j=0 ; j < 801 ; j++){
 			for(k=0 ; k < 801 ; k++)
 				t1[j][k]=0;
@@ -45,6 +47,9 @@ int generuj_obrazek(lista l, int r,int co_ile){
 
 void oznacz(int k, int l, int x, int n) {
 
+	/* funkcja dostaje informacje w którym miejscu jest 1 a pozniej wzgledem proporcji 
+	dodaje 2 do tablicy ktore potem benda kolorowane na inny kolor */
+
 	int i,j,a,b;
 
 	for (i = k * x + 1, a = 1; a < x && i < 801; a++, i++){
@@ -74,9 +79,10 @@ void generuj(int x, int n){
 	}
 }
 
-
-
 int skala(int n){
+
+	/* funkcja zaokrągla liczbe do najbliższej
+	większej liczby całkowitej */
 
 	if (800.0 / n == 800 / n)
 		return 800 / n;
@@ -92,7 +98,7 @@ int wypisywanie(int **tabka,int n,int ktora_generacja){
 
 	sprintf(nazwa_pliku,"image/%d.ppm",ktora_generacja);
 
-	fp = fopen(nazwa_pliku, "wb"); /* b - binary mode  */
+	fp = fopen(nazwa_pliku, "wb");
 
 	fprintf(fp, "P6\n%d %d\n255\n", 800, 800);
 

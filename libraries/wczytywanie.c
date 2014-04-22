@@ -43,6 +43,8 @@ lista readFromFile(char * fname,lista l){
 
 int ReadRows(char *fname){
 
+	/* wczytywanie ilosci wierszy */
+
 	int r;
 
 	FILE * file = fopen(fname,"r");
@@ -55,6 +57,8 @@ int ReadRows(char *fname){
 }
 
 int ReadColumns(char *fname){
+
+	/* wczytywanie ilosci kolumn */
 
 	int c,r;
 

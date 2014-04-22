@@ -13,7 +13,7 @@ int zasada_zywa(int **tablica, int r, int c,int *zmienna,int rows, int columns){
 				}
 			}
 		}
-	} else {
+	} else { /* zawinięcie */
 		for(i=c-1 ; i < c+2 ; i++){
                         if(i >= 0 && i < columns){
                                 if(tablica[rows-1][i] == 1){
@@ -31,7 +31,7 @@ int zasada_zywa(int **tablica, int r, int c,int *zmienna,int rows, int columns){
 				}
 			}
 		}
-	} else {
+	} else { /* zawinięcie */
                 for(i=c-1 ; i < c+2 ; i++) {
                         if(i >= 0 && i < columns){
                                 if(tablica[0][i] == 1){
@@ -45,7 +45,7 @@ int zasada_zywa(int **tablica, int r, int c,int *zmienna,int rows, int columns){
 		if(tablica[r][c-1] == 1){ /* przeszukanie z lewej strony komórki z zawinieciem przy skrajnych lewych wierszach */	 
 			ile_zywych++;
 		}
-	} else {
+	} else { /* zawinięcie */
                 if(tablica[r][columns-1] == 1){
                         ile_zywych++;
                 }
@@ -55,11 +55,13 @@ int zasada_zywa(int **tablica, int r, int c,int *zmienna,int rows, int columns){
 		if(tablica[r][c+1] == 1){  /* przeszukanie z prawej strony komórki z zawinieciem przy skrajnych prawych wierszach */
 			ile_zywych++;
 		}
-	} else {
+	} else { /* zawinięcie */
                 if(tablica[r][0] == 1){
                         ile_zywych++;
                 }
         }
+
+	/* zmiana zywa/martwa */
 
 	if(ile_zywych == 2 || ile_zywych == 3){
 		*zmienna=1;

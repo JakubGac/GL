@@ -25,11 +25,13 @@ int main ( int argc, char **argv){
 	int r,c;
 	int co_ile_generacji = 0;
 	int ilosc_generacji;
-	int obraz = 0;  /* sprawdzic typ boolean */
+	int obraz = 0;
 	int plik = 0; 
 
 	lista l = NULL;
 	
+	/* wczytuje flagi */
+
 	if(argc < 2 ){
 		system("clear");
 		printf("%s",napis);
@@ -64,6 +66,8 @@ int main ( int argc, char **argv){
 	
 	}
 
+	/* uruchamiam automat */
+
 	automat_komorkowy(l->tablica_element,r,c,ilosc_generacji,l);
 	
 	if(plik)	/* zapisywanie generacji do pliku */
@@ -72,7 +76,7 @@ int main ( int argc, char **argv){
 	if(obraz)	/* generowanie obrazków */
 			generuj_obrazek(l,r,co_ile_generacji);	
 
-	free_lista(l,r);
+	free_lista(l,r); /* zwalniam pamiec */
 
 	return EXIT_SUCCESS;
 }

@@ -3,6 +3,8 @@
 
 lista zapisz_generacje(lista l, int **tablica, int r, int c){
 
+	/* zapisywanie generacji do pliku */
+
         int i,a,b;
 
         if( l == NULL){
@@ -28,6 +30,8 @@ lista zapisz_generacje(lista l, int **tablica, int r, int c){
 
 void free_matrix(int **tablica,int r){
 
+	/* zwalnianie pamieci tablicy dwuwymiarowej */
+
 	int i;
 
 	for(i=0 ; i < r ; i++)
@@ -36,7 +40,10 @@ void free_matrix(int **tablica,int r){
 	free(tablica);
 }
 
+
 void free_lista(lista l, int r){
+
+	/* zwalnianie listy */
 
 	while( l != NULL){
 		free_matrix(l->tablica_element,r);
